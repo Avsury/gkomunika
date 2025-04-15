@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="{{ 'main-account.css' | asset_url }}">
+<script src="{{ 'main-account.js' | asset_url }}" defer="defer"></script>
+
+<div class="ma-container">
+  <section class="ma-section-menu hidden">
+    {% render 'menu-main-account' %}
+  </section>
+  <section class="ma-section-order-history-container">
+    <div id="order-history">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+          {%- when 'order' -%}
+            <section class="ma-section-order-history">
+              {% for order in customer.orders %}
+                <div class="ma-section-order-history-wrapper">
+                  <div id="ma-section-order-history-wrapper">
+                    <div class="ma-order-history-wrapper">
+                      <div class="ma-order-history-invoice">
+                        <img src="{{ 'border-inv.svg' | asset_url }}">
+                        <h2>{{ order.created_at | date: '%d/%m/%Y %H:%M' }}</h2>
+                      </div>
+                      <h2>#{{ order.name }}</h2>
+                    </div>
+
+                    {% for line_item in order.line_items %}
+                      <div class="ma-order-history-wrapper">
+                        <div class="ma-product-wrapper" data-order-id="{{ order.id }}">
+                          {% assign countries_array = line_item.product.metafields.coverage.country.value %}
+                          {% assign total_countries = countries_array.size %}
+                          {% if total_countries == 1 %}
+                            {% assign country_trimmed = countries_array.first | strip | downcase %}
+                            {% assign country_filename = country_trimmed
+                              | replace: ' ', '-'
+                              | capitalize
+                              | append: '.svg'
+                            %}
+                            <img
+                              class="ma-product-icon-single-flag"
+                              src="{{ country_filename | file_url }}"
+                              alt="{{ country_trimmed }}"
+                              width="40"
+                              height="40"
+                            >
+                          {% elsif total_countries > 1 %}
+                            <div class="ma-product-multi-flag">
+                              {% for country in countries_array limit: 3 %}
+                                {% assign country_trimmed = country | strip | downcase %}
+                                {% assign country_filename = country_trimmed
+                                  | replace: ' ', '-'
+                                  | capitalize
+                                  | append: '.svg'
+                                %}
+                                <img
+                                  class="ma-product-icon-multi-flag"
+                                  src="{{ country_filename | file_url }}"
+                                  alt="{{ country_trimmed }}"
+                                  width="25"
+                                  height="25"
+                                >
+                              {% endfor %}
+                              {% if total_countries > 3 %}
+                                <div class="ma-product-flag-count">
+                                  <span>+{{ total_countries | minus: 3 }}</span>
+                                </div>
+                              {% endif %}
+                            </div>
+                          {% endif %}
+
+                          <div class="ma-order-product-name">
+                            {% render 'product-info', line_item: line_item %}
+                          </div>
+                        </div>
+                        <div class="ma-order-quantity">
+                          <p>x {{ line_item.quantity }}</p>
+                          <p>{{ line_item.final_line_price | money }}</p>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="ma-section-order-history-wrapper order-details-container">
+                    {% render 'order-details-page', order: order %}
+                  </div>
+                </div>
+              {% endfor %}
+            </section>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+    <div id="edit-profile">{% render 'edit-profile' %}</div>
+    <div id="referral">{% render 'referral' %}</div>
+  </section>
+</div>
+
+<!-- script order-history copy yang befungsi untuk menampil order nya berdasarkan id yang diterima -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Ambil order_id dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get("order_id");
+
+    if (orderId) {
+      // Sembunyikan semua order
+      document.querySelectorAll(".ma-section-order-history-wrapper").forEach(function (orderWrapper) {
+        let orderButton = orderWrapper.querySelector(".ma-product-wrapper");
+
+        if (orderButton) {
+          let orderDataId = orderButton.getAttribute("data-order-id");
+
+          // Tampilkan hanya order yang sesuai dengan order_id dari URL
+          if (orderDataId === orderId) {
+            orderWrapper.style.display = "flex";
+          } else {
+            orderWrapper.remove();
+          }
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Main Order",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "order",
+      "name": "order history",
+      "limit": 1
+    },
+    {
+      "type": "summary",
+      "name": "order Summary",
+      "limit": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Orde"
+    }
+  ]
+}
+{% endschema %}

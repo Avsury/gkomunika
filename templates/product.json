@@ -1,0 +1,127 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "growave_loyalty_wishlist_block_product_review_avg_profile_ix3yaV": {
+          "type": "shopify://apps/growave-loyalty-wishlist/blocks/block.product.reviewAvgProfile/b3d2efbe-110a-4e27-84a8-1f2ed63996a4",
+          "settings": {
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "growave_loyalty_wishlist_block_product_review_avg_profile_ix3yaV"
+      ],
+      "settings": {}
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "1742972462a45f325d": {
+      "type": "apps",
+      "blocks": {
+        "growave_loyalty_wishlist_block_product_review_widget_HhYd9k": {
+          "type": "shopify://apps/growave-loyalty-wishlist/blocks/block.product.reviewWidget/b3d2efbe-110a-4e27-84a8-1f2ed63996a4",
+          "settings": {
+            "min_images_for_slider_visibility": 6,
+            "reviews_per_page": 5,
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "growave_loyalty_wishlist_block_product_review_widget_HhYd9k"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "custom_footer_fkqWee": {
+      "type": "custom-footer",
+      "blocks": {
+        "country_R7eeAf": {
+          "type": "country",
+          "settings": {
+            "country_name1": "Europe",
+            "country_name2": "China",
+            "country_name3": "Japan",
+            "country_name4": "Singapore",
+            "country_name5": "Thailand",
+            "country_name6": "Malaysia",
+            "country_name7": "Saudi Arabia",
+            "country_name8": "Australia",
+            "country_name9": "United States",
+            "country_name10": "Vietnam"
+          }
+        },
+        "link_Ymnhrc": {
+          "type": "link",
+          "settings": {
+            "link_label1": "About Us",
+            "link_url1": "",
+            "link_label2": "Privacy Policy",
+            "link_url2": "",
+            "link_label3": "Refund Policy",
+            "link_url3": "",
+            "link_label4": "Terms of Use",
+            "link_url4": "",
+            "link_label5": "Shipment Policy",
+            "link_url5": "",
+            "link_label6": "FAQ",
+            "link_url6": ""
+          }
+        }
+      },
+      "block_order": [
+        "country_R7eeAf",
+        "link_Ymnhrc"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 768px) {.footer {margin-bottom: 48%; }}"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/Logo_2.webp",
+        "heading": "CV GLOBAL JAYA KENCANA",
+        "address": "<p>Jl Jend Sudirman No. 346<br/>Ciroyom, Andir<br/>Bandung, Jawa Barat</p><p></p>",
+        "short_link": "https://maps.app.goo.gl/VE5kpgYYRSpkDuJfA?g_st=aw",
+        "popular_country_heading": "Popular Countries",
+        "about_heading": "About",
+        "contact_heading": "Contact",
+        "email": "globalkomunika.cs@gmail.com",
+        "whatsapp": "+628986454071"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "1742972462a45f325d",
+    "custom_footer_fkqWee"
+  ]
+}

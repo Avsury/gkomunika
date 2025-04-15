@@ -1,0 +1,53 @@
+<div class="ma-order-summary-container">
+  <div class="ma-order-summary-info normal">
+    <h2>Subtotal - {{ order.line_items.size }} items</h2>
+    <h2>
+      {% assign subtotal = 0 %}
+      {% for item in order.line_items %}
+        {% assign subtotal = subtotal | plus: item.final_line_price %}
+      {% endfor %}
+      {{ subtotal | money }}
+    </h2>
+  </div>
+  <div class="ma-order-summary-info normal">
+    <h2>Payment Fee</h2>
+    <h2>1</h2>
+  </div>
+  <div class="ma-order-summary-info normal">
+    <h2>Discount (Disc. Name)</h2>
+    <h2>{{ order.total_discounts | money }}</h2>
+  </div>
+  <div class="ma-order-summary-info bold">
+    <h2>Points Earned</h2>
+    <h2>3</h2>
+  </div>
+  <div class="ma-order-summary-info bold">
+    <h2>Total Payment</h2>
+    <h2>
+      {% assign total_payment = subtotal | plus: payment_fee | minus: order.total_discounts %}
+      {{ total_payment | money }}
+    </h2>
+  </div>
+</div>
+
+{% style %}
+  .ma-order-summary-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .ma-order-summary-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .ma-order-summary-info.normal h2 {
+    font-size: var(--font-large);
+    font-weight: normal;
+    margin: 0;
+  }
+  .ma-order-summary-info.bold h2 {
+    margin: 0;
+    font-weight: bold;
+    font-size: var(--font-large);
+  }
+{% endstyle %}

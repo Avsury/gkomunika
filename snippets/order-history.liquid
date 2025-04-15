@@ -1,0 +1,110 @@
+<section class="ma-section-order-history">
+  {% comment %}
+    {% assign orders_per_page = 5 %}
+    {% paginate customer.orders by orders_per_page %}
+  {% endcomment %}
+  {% for order in customer.orders %}
+    <div class="ma-section-order-history-wrapper">
+      <div id="ma-section-order-history-wrapper">
+        <div class="ma-order-history-wrapper">
+          <div class="ma-order-history-invoice">
+            <img src="{{ 'border-inv.svg' | asset_url }}">
+            <h2>{{ order.created_at | date: '%d/%m/%Y %H:%M' }}</h2>
+          </div>
+          <h2>#{{ order.name }}</h2>
+        </div>
+
+        {% for line_item in order.line_items %}
+          <div class="ma-order-history-wrapper">
+            <div class="ma-product-wrapper">
+              {% assign countries_array = line_item.product.metafields.coverage.country.value %}
+              {% assign total_countries = countries_array.size %}
+              {% if total_countries == 1 %}
+                {% assign country_trimmed = countries_array.first | strip | downcase %}
+                {% assign country_filename = country_trimmed | replace: ' ', '-' | capitalize | append: '.svg' %}
+                <img
+                  class="ma-product-icon-single-flag"
+                  src="{{ country_filename | file_url }}"
+                  alt="{{ country_trimmed }}"
+                  width="40"
+                  height="40"
+                >
+              {% elsif total_countries > 1 %}
+                <div class="ma-product-multi-flag">
+                  {% for country in countries_array limit: 3 %}
+                    {% assign country_trimmed = country | strip | downcase %}
+                    {% assign country_filename = country_trimmed | replace: ' ', '-' | capitalize | append: '.svg' %}
+                    <img
+                      class="ma-product-icon-multi-flag"
+                      src="{{ country_filename | file_url }}"
+                      alt="{{ country_trimmed }}"
+                      width="20"
+                      height="20"
+                    >
+                  {% endfor %}
+                  {% if total_countries > 3 %}
+                    <div class="ma-product-flag-count">
+                      <span>+{{ total_countries | minus: 3 }}</span>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              <div class="ma-order-product-name">
+                {% render 'product-info', line_item: line_item %}
+              </div>
+            </div>
+            <div class="ma-order-quantity">
+              <p>x {{ line_item.quantity }}</p>
+              <p>{{ line_item.final_line_price | money }}</p>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="ma-order-history-wrapper btn">
+          <div class="ma-order-total">
+            <p>Total Payment</p>
+            <h2>{{ order.total_price | money }}</h2>
+          </div>
+          <div class="ma-order-button">
+            {% comment %}
+              {% for line_item in order.line_items %}
+                <button class="write" onclick="window.location.href='{{ line_item.product.url }}'">
+                  Write Reviews
+                </button>
+              {% endfor %}
+            {% endcomment %}
+
+            <button class="details" data-order-id="{{ order.id }}">Details</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Snippet order-details -->
+      <div
+        class="ma-section-order-history-wrapper order-details-container"
+        id="order-details-{{ order.id }}"
+        style="display: none;"
+      >
+        {% render 'order-details', order: order %}
+      </div>
+    </div>
+  {% endfor %}
+
+  {% comment %}
+      <!-- Pagination Controls -->
+      {% render 'pagination', paginate: paginate %}
+    {% endpaginate %}
+  {% endcomment %}
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".details").forEach(function (button) {
+      button.addEventListener("click", function () {
+        let orderId = this.getAttribute("data-order-id");
+        window.location.href = "/pages/order-details?order_id=" + orderId;
+      });
+    });
+  });
+</script>

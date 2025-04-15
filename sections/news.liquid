@@ -1,0 +1,96 @@
+{% assign blog_articles = blogs.news.articles %}
+
+<div class="news-container">
+  <div class="news-content">
+    <div class="nc-wrapper">
+      {% for article in blog_articles limit: 8 %}
+        <div class="nc-item">
+          {% if article.image %}
+            <img src="{{ article.image | img_url: 'master' }}" width="100%" height="250px" alt="{{ article.title }}">
+          {% endif %}
+          <div class="news-content__wrapper">
+          <h2>
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </h2>
+          <p>{{ article.published_at | date: '%d/%m/%Y' }}</p>
+          <p>{{ article.content | strip_html | strip }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .news-container {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1920px;
+  }
+  .news-content {
+    padding: 20px 10%;
+  }
+  .nc-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+  .nc-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: var(--color-neutral);
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+  }
+  .nc-item img {
+    border-radius: 15px;
+    object-fit: cover;
+    aspect-ratio: 3 / 2;
+  }
+  .nc-item h2, p {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--color-primary);
+  }
+  .nc-item h2 {
+    -webkit-line-clamp: 2;
+    font-size: var(--font-supper-large);
+    font-weight: bold;
+  }
+  .nc-item p {
+    -webkit-line-clamp: 3;
+    font-size: var(--font-medium);
+  }
+  .nc-item a {
+    text-decoration: none;
+    color: var(--color-primary);
+  }
+  .nc-item a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 768px) {
+    .nc-wrapper {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .nc-item img {
+      aspect-ratio: 3 / 2;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "News Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "News Page"
+    },
+  ]
+}
+{% endschema %}

@@ -1,0 +1,872 @@
+{% style %}
+  .product-card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+  }
+  .main-search-container {
+    background-color: #F3FBFE;
+    padding: 20px 10%;
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+  .main-search-collection {
+    margin-top: 20px;
+  }
+  .main-search-collection.title {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    color: #005496;
+    font-size: 26px;
+  }
+  @media (max-width: 1440px) {
+    .product-card-wrapper {
+      grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 768px) {
+    .main-search-container {
+      padding: 20px 24px;
+    }
+    .product-card-wrapper {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+{% endstyle %}
+
+{% style %}
+  .product-card-container {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+  }
+  .product-card-country {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    justify-content: left;
+    align-text: center;
+  }
+  .product-card-country h1 {
+    mdisplay: flex;
+    margin: 0;
+    color: #005496;
+    font-size: 20px;
+    font-weight: bold;
+    white-space: wrap;
+    text-overflow: ellipsis;
+  }
+  .product-card-icon-single-flag {
+    border-radius: 15px;
+    border: 1px solid #D9D9D9;
+  }
+  .product-card-multi-flag {
+    gap: 3px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: 5px;
+  }
+  .product-card-icon-multi-flag {
+    gap: 3px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: 5px;
+    border: 1px solid #D9D9D9;
+  }
+  .product-card-flag-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    color: #005496;
+    background-color: white;
+  }
+  .product-card-flag-count span {
+    color: #005496;
+    font-weight: bold;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  /* content */
+  .product-card-field-icons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-card-field-icons h1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #005496;
+  }
+  .product-card-field-icons h2 {
+      word-break: break-all;
+      -webkit-line-clamp: 2;
+  }
+  .product-card-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px ridge;
+    padding: 10px 0;
+  }
+  img.field-icon {
+    width: 30px;
+    height: 30px;
+    align-items: center;
+  }
+  .product-card-field h2 {
+    color: #00ADEE;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .product-card-btn {
+    width: 100%;
+    height: 55px;
+    background-color: #005496;
+    border: none;
+    border-radius: 20px;
+    font-weight: 16px;
+  }
+  .product-card-btn a p {
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  /* content */
+  .product-card-content {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;  /* Pastikan tingginya tetap penuh */
+    border-radius: 10px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+    will-change: transform;
+  }
+  .country-total-atribut-wrapper {
+    display: inline-block; /* Agar width bisa diterapkan */
+    max-width: 125px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .country-total-atribut span {
+    color: #00ADEE;
+    width: 100%;
+    max-width: 125px;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 0;
+  }
+  .country-total-atribut button {
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #00ADEE;
+    background: none;
+  }
+  .country-total-including-atribut {
+    background-color: #00ADEE;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+  }
+  .country-total-including-atribut p {
+    margin: 5px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  .product-card-content-flip-front,
+  .product-card-content-flip-back {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    dsplay: flex;
+    flex-direction: column;
+    gap: 7px;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+  }
+  .product-card-container .product-card-content {
+    transform: rotateY(0deg);
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .product-card-container.flipped .product-card-content {
+    transform: rotateY(180deg);
+  }
+
+  .product-card-content-flip-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 100%;
+    background: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    transform: rotateY(180deg);
+  }
+{% endstyle %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("#flipped").forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        event.stopPropagation(); // Mencegah event dari menyebar ke elemen lain
+        let card = this.closest(".product-card-container");
+        card.classList.toggle("flipped"); // Tambah/hapus class flipped
+      });
+    });
+
+    document.addEventListener("click", function (event) {
+      document.querySelectorAll(".product-card-container.flipped").forEach(function (card) {
+        // Jika klik terjadi di dalam .product-card-content-flip-back, tetap reset flip
+        if (!card.contains(event.target) || event.target.closest(".product-card-content-flip-back")) {
+          card.classList.remove("flipped");
+        }
+      });
+    });
+  });
+</script>
+
+<main-search>
+  <div class="main-search-container">
+    {% assign search_term = search.terms | downcase | strip %}
+    {% assign collections_to_check = 'single_country_collection,multi_country_collection,global_country_collection'
+      | split: ','
+    %}
+    {% assign found_any_product = false %}
+    {% assign single_product_url = '' %}
+    {% assign product_count = 0 %}
+
+    {% for collection_key in collections_to_check %}
+      {% assign collection = collections[section.settings[collection_key]] %}
+      {% assign found_product = false %}
+      {% assign product_output = '' %}
+
+      {% for product in collection.products %}
+        {% assign product_alias = product.metafields.coverage.alias | downcase | strip %}
+        {% assign product_countries = product.metafields.coverage.country.value %}
+        {% assign product_region = product.metafields.coverage.region | downcase | strip %}
+        {% assign matched_countries = '' %}
+
+        {% if collection_key == 'global_country_collection' or collection_key == 'multi_country_collection' %}
+          {% assign matched_countries_array = '' %}
+          {% for country in product_countries %}
+            {% assign country_downcase = country | downcase | strip %}
+            {% if country_downcase contains search_term %}
+              {% assign matched_countries_array = matched_countries_array | append: country | append: '' %}
+            {% endif %}
+          {% endfor %}
+          {% assign matched_countries = matched_countries_array | strip %}
+        {% endif %}
+
+        {% if product_alias contains search_term or matched_countries != '' or product_region contains search_term %}
+          {% assign found_product = true %}
+          {% assign found_any_product = true %}
+          {% assign product_count = product_count | plus: 1 %}
+          {% assign single_product_url = product.url %}
+
+          {% capture product_card %}
+          <div class="product-card-container">
+            <div class="product-card-country">
+              {% assign total_countries = product_countries.size %}
+              {% if total_countries == 1 %}
+                {% assign country_trimmed = product_countries.first | strip %}
+                {% assign country_filename = country_trimmed | replace: ' ', '-' | append: '.svg' %}
+                <img 
+                  class="product-card-icon-single-flag" 
+                  src="{{ country_filename | file_url }}" 
+                  alt="{{ country_trimmed }}" 
+                  width="50" 
+                  height="50"
+                >
+              {% elsif total_countries > 1 %}
+                <div class="product-card-multi-flag">
+                  {% if total_countries <= 4 %}
+  {% for country in product_countries %}
+    {% comment %} Proses khusus untuk mempertahankan _K {% endcomment %}
+    {% assign country_parts = country | split: '_' %}
+    {% assign country_processed = '' %}
+    
+    {% for part in country_parts %}
+      {% assign part_processed = part | downcase | capitalize %} 
+      {% if forloop.first %}
+        {% assign country_processed = part_processed %}
+      {% else %}
+        {% assign country_processed = country_processed | append: '_' | append: part_processed %}
+      {% endif %}
+    {% endfor %}
+    
+    {% assign country_filename = country_processed | replace: ' ', '-' | append: '.svg' %}
+    <img class="product-card-icon-multi-flag" src="{{ country_filename | file_url }}" alt="{{ country_processed }}" width="25" height="25">
+  {% endfor %}
+{% else %}
+                      {% for country in product_countries limit: 3 %}
+                        {% comment %} Pisahkan string berdasarkan underscore dan proses masing-masing bagian {% endcomment %}
+                        {% assign country_parts = country | split: '_' %}
+                        {% assign country_processed = '' %}
+                        
+                        {% for part in country_parts %}
+                          {% assign part_processed = part | downcase | capitalize %}
+                          {% if forloop.first %}
+                            {% assign country_processed = part_processed %}
+                          {% else %}
+                            {% assign country_processed = country_processed | append: '_' | append: part_processed %}
+                          {% endif %}
+                        {% endfor %}
+                        
+                        {% assign country_filename = country_processed | replace: ' ', '-' | append: '.svg' %}
+                        <img class="product-card-icon-multi-flag" src="{{ country_filename | file_url }}" alt="{{ country_processed }}" width="25" height="25">
+                      {% endfor %}
+                      <div class="product-card-flag-count">
+                        <span>+{{ total_countries | minus: 3 }}</span>
+                      </div>
+                    {% endif %}
+                </div>
+              {% endif %}
+              <h1>{{ product.title }}</h1>
+            </div>
+
+            <div class="product-card-content">
+              <div class="product-card-content-flip-front">
+                {% if product_countries.size > 1 %}
+                  <div class="product-card-field" style="border-top: 1px ridge;">
+                    <div class="product-card-field-icons">
+                      <img class="field-icon" src="{{ 'icon-park-outline_world.svg' | asset_url }}" alt="Icon">
+                      <h1>Coverage</h1>
+                    </div>
+                    <div class="country-total-atribut-wrapper">
+                      <div class="country-total-atribut">
+                        <button id="flipped">
+                          <span>{{ product_countries.size }} Countries</span>
+                        </button>
+                      </div>
+                      <div class="country-total-including-atribut">
+                        {% if matched_countries != blank %}
+                          <p>Including {{ matched_countries }}</p>
+                        {% comment %}{% elsif matched_regions != blank %}
+                          <p>Including {{ matched_regions }}</p>{% endcomment %}
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if product.variants.size > 0 %}
+                  {% assign first_optiondays = product.variants.first.option1 | replace: ' Days', '' %}
+                  {% assign last_optiondays = product.variants.last.option1 | strip %}
+                  {% assign first_optionquota = product.variants.first.option2 | replace: 'GB', '' | replace: 'MB', '' %}
+                  {% assign last_optionquota = product.variants.last.option2 | strip %}
+
+                  <div class="product-card-field">
+                    <div class="product-card-field-icons">
+                      <img class="field-icon" src="{{ 'icon-tabler_mobiledata.svg' | asset_url }}" alt="Icon">
+                      <h1>Data</h1>
+                    </div>
+                    <h2>{{ last_optionquota }}</h2> 
+                  </div>
+
+                  <div class="product-card-field">
+                    <div class="product-card-field-icons">
+                      <img class="field-icon" src="{{ 'icon-date-range.svg' | asset_url }}" alt="Icon">
+                      <h1>Days</h1>
+                    </div>
+                    <h2>{{ first_optiondays }} - {{ last_optiondays }}</h2>
+                  </div>
+
+                  <div class="product-card-field">
+                    <div class="product-card-field-icons">
+                      <img class="field-icon" src="{{ 'icon-dollar.svg' | asset_url }}" alt="Icon">
+                      <h1>Price</h1>
+                    </div>
+                    <h2>From {{ product.price | money_with_currency }}</h2>
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="product-card-content-flip-back">
+                {% render 'coverage', product: product %}
+              </div>
+            </div>
+
+            <div class="product-card-button">
+              <button class="product-card-btn">
+                <a href="{{ product.url }}">
+                  <p>Buy Now</p>
+                </a>
+              </button>
+            </div>
+          </div>
+          {% endcapture %}
+          {% assign product_output = product_output | append: product_card %}
+        {% endif %}
+      {% endfor %}
+
+      {% if found_product %}
+        <div class="main-search-collection">
+          <h1 class="main-search-collection title">{{ collection.title }}</h1>
+          <div class="product-card-wrapper" id="{{ collection_key }}">
+            {{ product_output }}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {% unless found_any_product %}
+      <p>No products found for "{{ search.terms }}"</p>
+    {% endunless %}
+    {% if product_count == 1 %}
+      <script>
+        window.location.href = "{{ single_product_url }}";
+      </script>
+    {% endif %}
+  </div>
+</main-search>
+
+{% comment %}
+  {% style %}
+    :root {
+      --primary-color: #005496;
+      --secondary-color: #00ADEE;
+      --background-color: #F3FBFE;
+      --border-color: #D9D9D9;
+      --white: #ffffff;
+    }
+
+    .product-card-wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: 100%;
+      gap: 20px;
+    }
+
+    .main-search-container {
+      background-color: var(--background-color);
+      padding: 20px 10%;
+      max-width: 1920px;
+      min-width: 400px;
+      margin: 0 auto;
+    }
+
+    .main-search-collection {
+      margin-top: 20px;
+    }
+
+    .main-search-collection.title {
+      margin: 0 0 10px 0;
+      font-weight: bold;
+      color: var(--primary-color);
+      font-size: 26px;
+    }
+
+    .product-card-container {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      gap: 15px;
+      padding: 10px;
+      flex-direction: column;
+      background-color: var(--white);
+      border-radius: 15px;
+    }
+
+    .product-card-country {
+      display: flex;
+      width: 100%;
+      gap: 10px;
+      align-items: center;
+      justify-content: left;
+    }
+
+    .product-card-country h1 {
+      margin: 0;
+      color: var(--primary-color);
+      font-size: 20px;
+      font-weight: bold;
+      white-space: wrap;
+      text-overflow: ellipsis;
+    }
+
+    .product-card-icon-single-flag,
+    .product-card-icon-multi-flag {
+      border-radius: 15px;
+      border: 1px solid var(--border-color);
+    }
+
+    .product-card-multi-flag {
+      gap: 3px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-radius: 5px;
+    }
+
+    .product-card-flag-count {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      color: var(--primary-color);
+      background-color: var(--white);
+    }
+
+    .product-card-flag-count span {
+      color: var(--primary-color);
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .product-card-field-icons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .product-card-field-icons h1 {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .product-card-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px ridge;
+      padding: 10px 0;
+    }
+
+    img.field-icon {
+      width: 30px;
+      height: 30px;
+      align-items: center;
+    }
+
+    .product-card-field h2 {
+      color: var(--secondary-color);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .product-card-btn {
+      width: 100%;
+      height: 55px;
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+    }
+
+    .product-card-btn a p {
+      font-weight: bold;
+      color: var(--white);
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .product-card-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .country-total-atribut span {
+      color: var(--secondary-color);
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .country-total-atribut button {
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 10px;
+      width: 100%;
+      border: 1px solid var(--secondary-color);
+      background: none;
+    }
+
+    .country-total-including-atribut {
+      background-color: var(--secondary-color);
+      width: 100%;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    .country-total-including-atribut p {
+      margin: 5px;
+      color: var(--white);
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .product-card-content-flip-front,
+    .product-card-content-flip-back {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .product-card-content-flip-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: var(--white);
+      text-align: center;
+      cursor: pointer;
+      transform: rotateY(180deg);
+    }
+
+    .product-card-container.flipped .product-card-content {
+      transform: rotateY(180deg);
+    }
+
+    @media (max-width: 1440px) {
+      .product-card-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 999px) {
+      .product-card-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-search-collection {
+        max-width: 310px;
+      }
+      .product-card-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+      }
+      .main-search-container {
+        padding: 20px 25px;
+      }
+    }
+  {% endstyle %}
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("click", function (event) {
+        if (event.target.closest("#flipped")) {
+          event.stopPropagation();
+          const card = event.target.closest(".product-card-container");
+          card.classList.toggle("flipped");
+        } else {
+          document.querySelectorAll(".product-card-container.flipped").forEach(card => {
+            card.classList.remove("flipped");
+          });
+        }
+      });
+    });
+  </script>
+
+  <main-search>
+    <div class="main-search-container">
+      {% assign search_term = search.terms | downcase | strip %}
+      {% assign collections_to_check = 'single_country_collection,multi_country_collection,global_country_collection' | split: ',' %}
+      {% assign found_any_product = false %}
+      {% assign single_product_url = '' %}
+      {% assign product_count = 0 %}
+
+      {% for collection_key in collections_to_check %}
+        {% assign collection = collections[section.settings[collection_key]] %}
+        {% assign found_product = false %}
+        {% assign product_output = '' %}
+
+        {% for product in collection.products %}
+          {% assign product_alias = product.metafields.coverage.alias | downcase | strip %}
+          {% assign product_countries = product.metafields.coverage.country.value %}
+          {% assign matched_countries = '' %}
+
+          {% if collection_key == 'global_country_collection' or collection_key == 'multi_country_collection' %}
+            {% assign matched_countries_array = product_countries | map: 'downcase' | map: 'strip' | join: ',' %}
+            {% if matched_countries_array contains search_term %}
+              {% assign matched_countries = product_countries | join: ', ' %}
+            {% endif %}
+          {% endif %}
+
+          {% if product_alias contains search_term or matched_countries != '' %}
+            {% assign found_product = true %}
+            {% assign found_any_product = true %}
+            {% assign product_count = product_count | plus: 1 %}
+            {% assign single_product_url = product.url %}
+
+            <div class="product-card-container">
+              <div class="product-card-country">
+                {% if product_countries.size == 1 %}
+                  <img class="product-card-icon-single-flag" src="{{ product_countries.first | strip | downcase | replace: ' ', '-' | capitalize | append: '.svg' | file_url }}" alt="{{ product_countries.first }}" width="50" height="50">
+                {% else %}
+                  <div class="product-card-multi-flag">
+                    {% for country in product_countries limit: 3 %}
+                      <img class="product-card-icon-multi-flag" src="{{ country | strip | downcase | replace: ' ', '-' | capitalize | append: '.svg' | file_url }}" alt="{{ country }}" width="25" height="25">
+                    {% endfor %}
+                    {% if product_countries.size > 3 %}
+                      <div class="product-card-flag-count">
+                        <span>+{{ product_countries.size | minus: 3 }}</span>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                <h1>{{ product.title }}</h1>
+              </div>
+
+              <div class="product-card-content">
+                <div class="product-card-content-flip-front">
+                  {% if product_countries.size > 1 %}
+                    <div class="product-card-field" style="border-top: 1px ridge;">
+                      <div class="product-card-field-icons">
+                        <img class="field-icon" src="{{ 'icon-park-outline_world.svg' | asset_url }}" alt="Icon">
+                        <h1>Coverage</h1>
+                      </div>
+                      <div>
+                        <div class="country-total-atribut">
+                          <button id="flipped">
+                            <span>{{ product_countries.size }} Countries</span>
+                          </button>
+                        </div>
+                        <div class="country-total-including-atribut">
+                          <p>Including {{ matched_countries }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+
+                  {% if product.variants.size > 0 %}
+                    <div class="product-card-field">
+                      <div class="product-card-field-icons">
+                        <img class="field-icon" src="{{ 'tabler_mobiledata.svg' | asset_url }}" alt="Icon">
+                        <h1>Data</h1>
+                      </div>
+                      <h2>{{ product.variants.last.option2 | strip }}</h2>
+                    </div>
+
+                    <div class="product-card-field">
+                      <div class="product-card-field-icons">
+                        <img class="field-icon" src="{{ 'mdi_date-range.svg' | asset_url }}" alt="Icon">
+                        <h1>Days</h1>
+                      </div>
+                      <h2>{{ product.variants.first.option1 | replace: ' Days', '' }} - {{ product.variants.last.option1 | strip }}</h2>
+                    </div>
+
+                    <div class="product-card-field">
+                      <div class="product-card-field-icons">
+                        <img class="field-icon" src="{{ 'mdi_dollar.svg' | asset_url }}" alt="Icon">
+                        <h1>Price</h1>
+                      </div>
+                      <h2>From {{ product.price | money }}</h2>
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="product-card-content-flip-back">
+                  {% render 'coverage', product: product %}
+                </div>
+              </div>
+
+              <div class="product-card-button">
+                <button class="product-card-btn">
+                  <a href="{{ product.url }}">
+                    <p>Buy Now</p>
+                  </a>
+                </button>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% if found_product %}
+          <div class="main-search-collection">
+            <h1 class="main-search-collection title">{{ collection.title }}</h1>
+            <div class="product-card-wrapper" id="{{ collection_key }}">
+              {{ product_output }}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% unless found_any_product %}
+        <p>No products found for "{{ search.terms }}"</p>
+      {% endunless %}
+      {% if product_count == 1 %}
+        <script>
+          window.location.href = "{{ single_product_url }}";
+        </script>
+      {% endif %}
+    </div>
+  </main-search>
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Main Search",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Single Country Title",
+      "id": "title_single",
+      "default": "Single Country"
+    },
+    {
+      "type": "collection",
+      "label": "Single Country Collection",
+      "id": "single_country_collection"
+    },
+    {
+      "type": "text",
+      "label": "Multi Country Title",
+      "id": "title_multi",
+      "default": "Multi Country"
+    },
+    {
+      "type": "collection",
+      "label": "Multi Country Collection",
+      "id": "multi_country_collection"
+    },
+    {
+      "type": "text",
+      "label": "Global Country Title",
+      "id": "title_global",
+      "default": "Global Country"
+    },
+    {
+      "type": "collection",
+      "label": "Global Country Collection",
+      "id": "global_country_collection"
+    }
+  ]
+}
+{% endschema %}
