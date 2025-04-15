@@ -1,7 +1,7 @@
 <div class="ma-order-details">
   <div class="ma-order-details-wrapper">
     <h2 class="bold">eSIM Details</h2>
-    <h3>Qr Sent to: <span>email@gmail.com</span></h3>
+    <h3>Qr Sent to: <span>{{ order.email }}</span></h3>
     {% for line_item in order.line_items %}
       {% for data in order.metafields.sim_card.details.value.activation_code %}
         <section class="ma-order-redeem">
