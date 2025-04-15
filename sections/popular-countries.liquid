@@ -18,7 +18,7 @@
     >
       {% case section.settings.display_mode %}
         {% when 'option_1' %}
-          {% assign collection = collections[section.settings.land_collection] %}
+          {% assign collection = collections['all_country'] %}
           {% render 'land-country', collection: collection %}
         {% when 'option_2' %}
           {% assign collection = collections['all-country'] %}

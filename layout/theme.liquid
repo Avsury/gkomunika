@@ -440,9 +440,10 @@
     </main>
 
 
-    {% unless template.name == 'login' or template.name == 'register' %}
+    {% unless template.name == 'login' or template.name == 'register' or template.name == 'search' %}
       {% sections 'footer-group' %}
     {% endunless %}
+    
 
 
     <ul hidden>
