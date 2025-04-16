@@ -29,7 +29,12 @@
  {% endcomment %}
 
 
- {% assign allowed_countries = "Singapore,Malaysia,Thailand,China,Japan,South_Korea,USA,Europe,Saudi_Arabia,Hong_Kong,Vietnam,Taiwan" | split: "," %}
+ {% if request.locale.iso_code == 'id' %}
+  {% assign allowed_countries = "Singapura,Malaysia,Thailand,China,Jepang,Korea_Selatan,Amerika_Serikat,Eropa,Arab_Saudi,Hong_Kong,Vietnam,Taiwan" | split: "," %}
+{% else %}
+  {% assign allowed_countries = "Singapore,Malaysia,Thailand,China,Japan,South_Korea,USA,Europe,Saudi_Arabia,Hong_Kong,Vietnam,Taiwan" | split: "," %}
+{% endif %}
+
 
 {% if allowed_countries.size > 0 %}
   {% for allowed_country in allowed_countries %}
@@ -40,6 +45,9 @@
 
     {% if allowed_country == "Europe" %}
       {% assign image_country = "Europe_Top" %}
+    {% endif %}
+    {% if allowed_country == "Eropa" %}
+      {% assign image_country = "Eropa_Top" %}
     {% endif %}
 
     <!-- Loop produk untuk cari harga termurah -->

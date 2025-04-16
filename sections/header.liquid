@@ -13,8 +13,7 @@
       </div>
       {% if section.settings.logo != blank %}
         <a href="/">
-          <img class="header-content-logo" src="{{ section.settings.logo | img_url: 'medium' }}" width="120px" height="40px" alt="Site Logo" loading="eager
-            ">
+          <img class="header-content-logo" src="{{ section.settings.logo | img_url: 'medium' }}" width="120px" height="40px" alt="Site Logo" loading="eager">
         </a>
       {% endif %}
     </div>
@@ -36,39 +35,35 @@
 
           {% comment %}<div id="bucks-floating-mobile" class="hidden"></div>{% endcomment %}
         </li>
-        {% comment %}<li>
+        <li>
           <form class="language-selector-form" onsubmit="event.preventDefault();">
-  <select id="language-select" onchange="redirectToLanguage()" style="padding: 0 5px;">
-    <option
-      value="https://gkomunika.com"
-      {% if request.locale.iso_code == 'en' %}
-        selected
-      {% endif %}
-    >
-      English
-    </option>
-
-    <option
-      value="https://gkomunika.com/id"
-      {% if request.locale.iso_code == 'id' %}
-        selected
-      {% endif %}
-    >
-      Indonesia
-    </option>
-  </select>
-</form>
-
-<script>
-  function redirectToLanguage() {
-    const select = document.getElementById('language-select');
-    const selectedUrl = select.value;
-    window.location.href = selectedUrl;
-  }
-</script>
-
+            <select id="language-select" onchange="redirectToLanguage()" style="padding: 0 5px;">
+              <option value="https://gkomunika.com">English</option>
+              <option value="https://gkomunika.com/id">Indonesia</option>
+            </select>
+          </form>
+          
+          <script>
+            function redirectToLanguage() {
+              const select = document.getElementById('language-select');
+              const selectedUrl = select.value;
+              window.location.href = selectedUrl;
+            }
+          
+            document.addEventListener('DOMContentLoaded', function () {
+              const currentPath = window.location.pathname;
+          
+              const select = document.getElementById('language-select');
+          
+              if (currentPath.startsWith('/id')) {
+                select.value = 'https://gkomunika.com/id';
+              } else {
+                select.value = 'https://gkomunika.com';
+              }
+            });
+          </script>
+          
         </li>
-  {% endcomment %}
         <li>
           <a href="/cart" class="cart-link" aria-label="Shopping Cart">
             <img class="header-content-icon" src="{{ 'cart.svg' | asset_url }}" width="27px" height="27px" alt="Cart Icon" loading="eager">
