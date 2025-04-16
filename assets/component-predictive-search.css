@@ -148,7 +148,7 @@ predictive-search[loading] .predictive-search__results-groups-wrapper ~ .predict
 .predictive-search__list-item:hover > *,
 .predictive-search__item[aria-selected='true'],
 .predictive-search__item:hover {
-  color: rgb(var(--color-foreground));
+  color: var(--color-primary);
   background-color: rgba(var(--color-foreground), 0.04);
 }
 
