@@ -1,7 +1,7 @@
 <div class="ma-order-details">
   <div class="ma-order-details-wrapper">
     <h2 class="bold">eSIM Details</h2>
-    <h3>Qr Sent to: <span>{{ order.email }}</span></h3>
+    <h3>QR SENT TO: <span>{{ order.email }}</span></h3>
     {% for line_item in order.line_items %}
       {% for data in order.metafields.sim_card.details.value.activation_code %}
         <section class="ma-order-redeem">
@@ -277,7 +277,7 @@ function toggleDetails(element) {
   }
   .ma-redeem-data h2{
     margin: 0;
-    font-size: var(--font-small);
+    font-size: var(--font-extra-large);
     color: var(--color-primary);
     font-weight: bold;
     display: -webkit-box;
@@ -298,6 +298,10 @@ function toggleDetails(element) {
   .ma-redeem-data-wrapper {
     width: 100%;
   }
+  .copy-button-icon {
+    color: var(--color-primary);
+  }
+
   .ma-redeem-data {
     display: flex;
     justify-content: space-between;
