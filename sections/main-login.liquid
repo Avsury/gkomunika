@@ -58,12 +58,18 @@
               <span class="field-error-message" id="LoginPasswordError"></span>
             </div>
 
-            <div class='oxi-social-login'></div>
-
             <div class="WrapperButton-form">
               <a href="javascript:void(0)" class="link-recover" onclick="showRecoveryForm()">Forgot Password?</a>
               <button class="button-form" id="login-button" type="submit">Log In</button>
             </div>
+
+            <div class="custom-auth-divider">
+              <span>OR LOGIN WITH</span>
+            </div>
+            
+            <div class="oxi-social-login" style="margin-top: 15px">
+            </div>
+
           {%- endform -%}
         </div>
 
@@ -261,7 +267,23 @@
   font-size: 0.875rem;
   margin-top: 4px;
 }
-
+.custom-auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 15px 0;
+}
+.custom-auth-divider::before,
+.custom-auth-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #005496; /* Warna biru seperti teks */
+  margin: 0 10px;
+}
+.custom-auth-divider span {
+  font-size: 14px;
+  color: #005496; /* Sesuaikan warna teks */
+}
 </style>
 
 
