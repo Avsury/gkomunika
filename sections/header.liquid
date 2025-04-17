@@ -29,11 +29,8 @@
           {% endfor %}
         {% endif %}
         <li>
-          {% if template != 'index' %}
-            <div id="bucks-floating-desktop"></div>
-          {% endif %}
-
-          {% comment %}<div id="bucks-floating-mobile" class="hidden"></div>{% endcomment %}
+          <div id="bucks-floating-desktop"></div>
+          <div id="bucks-floating-mobile" class="hidden"></div>
         </li>
         <li>
           <form class="language-selector-form" onsubmit="event.preventDefault();">

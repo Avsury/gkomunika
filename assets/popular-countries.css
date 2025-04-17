@@ -134,6 +134,11 @@
   width: 343px;
   text-decoration: none;
   margin: 20px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.show-all-destination:active {
+  transform: scale(0.96);
 }
 
 .placeholder {
