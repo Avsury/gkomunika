@@ -103,14 +103,6 @@
     height: 40px;
   }
 
-  .buckscc-select-options {
-    display: flex;
-    flex-direction: column;
-    max-height: 400px;
-    overscroll-behavior: contain;
-    padding: 5px 0;
-  }
-
   .bucks__folder-collapse_btn svg {
     stroke: var(--color-primary);
   }

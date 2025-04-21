@@ -29,7 +29,18 @@
       }
     }
   ],
-  "page": [],
+  "page": [
+    {
+      "key": "membership",
+      "namespace": "page",
+      "name": "membership",
+      "description": "",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    }
+  ],
   "product": [
     {
       "key": "custom_product",
