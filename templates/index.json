@@ -119,24 +119,24 @@
           "type": "htu_card",
           "settings": {
             "icon": "",
-            "title": "",
-            "paragraph": ""
+            "title": "Choose the eSIM Plan that Fits Your Trip",
+            "paragraph": "Select a data plan based on your destination, duration, and data needs from our available options."
           }
         },
         "htu_card_UFf7hP": {
           "type": "htu_card",
           "settings": {
             "icon": "",
-            "title": "",
-            "paragraph": ""
+            "title": "Scan the QR Code Sent to Your Email.",
+            "paragraph": "After purchase, you will receive a QR Code via email. Simply scan it with your phone for installation."
           }
         },
         "htu_card_caei9d": {
           "type": "htu_card",
           "settings": {
             "icon": "",
-            "title": "",
-            "paragraph": ""
+            "title": "Activate and You are Ready to Go",
+            "paragraph": "Once activated, your eSIM connects instantly, allowing you to go online without swapping physical eSIM."
           }
         },
         "review_top_Ci4m9t": {
@@ -171,45 +171,53 @@
           "type": "wgk_card",
           "settings": {
             "icon": "",
-            "title": "",
-            "paragraph": ""
+            "title": "Over 100.00+ eSIMs Sold",
+            "paragraph": "Trusted by thousands of travelers around the world."
           }
         },
         "wgk_card_iNVbUP": {
           "type": "wgk_card",
           "settings": {
             "icon": "",
-            "title": "",
-            "paragraph": ""
+            "title": "100% SIM Activation & Value for Money Guarantee",
+            "paragraph": "Get what you pay for; fast activation and dependable service."
           }
         },
         "wgk_card_aYrG6L": {
           "type": "wgk_card",
           "settings": {
             "icon": "",
-            "title": "",
-            "paragraph": ""
+            "title": "Trusted Pioneer of Travel eSIM Since 2016",
+            "paragraph": "Years of experience ensuring seamless connectivity for global travelers."
+          }
+        },
+        "wgk_card_9ErqeH": {
+          "type": "wgk_card",
+          "settings": {
+            "icon": "",
+            "title": "Coverage in 100+ Countries Worldwide",
+            "paragraph": "Stay connected across continents with one reliable provider."
           }
         },
         "benefits_card_MzkGRQ": {
           "type": "benefits_card",
           "settings": {
-            "title": "",
-            "paragraph": ""
+            "title": "You Can Keep Your SIM Card for OTP",
+            "paragraph": "You can still receive important messages and calls on your regular number while using eSIM."
           }
         },
         "benefits_card_4W8FKR": {
           "type": "benefits_card",
           "settings": {
-            "title": "",
-            "paragraph": ""
+            "title": "Easy to Set Up",
+            "paragraph": "No need to visit a store or insert a card, simply scan the QR Code and you are online."
           }
         },
         "benefits_card_WYL8qw": {
           "type": "benefits_card",
           "settings": {
-            "title": "",
-            "paragraph": ""
+            "title": "Encrypted Connection",
+            "paragraph": "Your data is protected with secure network encryption while browsing abroad."
           }
         }
       },
@@ -224,6 +232,7 @@
         "wgk_card_RdTXpt",
         "wgk_card_iNVbUP",
         "wgk_card_aYrG6L",
+        "wgk_card_9ErqeH",
         "benefits_card_MzkGRQ",
         "benefits_card_4W8FKR",
         "benefits_card_WYL8qw"
