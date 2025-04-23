@@ -48,7 +48,7 @@
   color: var(--color-primary);
 }
 
-.footer a::active {
+.footer a:active {
   text-decoration: none;
   color: var(--color-primary);
 }
@@ -62,7 +62,7 @@
 .footer__contact--label {
   color: var(--color-gray);
 }
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .footer-container__wrapper {
     grid-template-columns: repeat(1, 1fr);
     padding: 20px 24px;
