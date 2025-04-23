@@ -218,6 +218,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
   
+  .popular-countries h2 {
+    font-size: 28px;
+  }
+
   /* .tab-content a:nth-child(n + 5) {
     display: none;
   } */
