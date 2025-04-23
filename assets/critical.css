@@ -385,7 +385,7 @@
   padding: 20px 10%;
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 50px;
 }
 
 .htu__grid {
@@ -465,11 +465,18 @@
   font-size: var(--font-supper-large);
   font-weight: bold;
   color: var(--color-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .htu__customer-comment {
   font-size: var(--font-large);
   color: var(--color-neutral);
+}
+
+.htu__benefits {
+  margin-bottom: 100px;
 }
 
 @media (max-width: 768px) {
