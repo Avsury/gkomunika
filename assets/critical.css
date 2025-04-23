@@ -485,6 +485,10 @@
     gap: 30px;
   }
 
+  .htu__title {
+    font-size: 28px;
+  }
+
   .htu__wrapper {
     padding: 20px 24px;
   }
