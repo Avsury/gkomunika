@@ -1,4 +1,20 @@
 {% assign blog_articles = blogs.news.articles %}
+<ul>
+  {% for page in pages %}
+    {% if page.metafields.pages.category.value == "Travel_Tips" %}
+      <li>
+        <a href="{{ page.url }}">{{ page.title }}</a>
+        {% assign img_html_parts = page.content | split: '<img' %}
+        {% if img_html_parts.size > 1 %}
+          {% assign first_img_tag = img_html_parts[1] | split: '>' | first | prepend: '<img' | append: '>' %}
+          {{ first_img_tag }}
+        {% endif %}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+
 
 <div class="news-container">
   <div class="news-content">
