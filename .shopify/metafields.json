@@ -29,7 +29,28 @@
       }
     }
   ],
-  "page": [],
+  "page": [
+    {
+      "key": "product",
+      "namespace": "related",
+      "name": "related product",
+      "description": "",
+      "type": {
+        "name": "list.product_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "product",
+      "namespace": "recomendation",
+      "name": "recomendation product",
+      "description": "",
+      "type": {
+        "name": "collection_reference",
+        "category": "REFERENCE"
+      }
+    }
+  ],
   "product": [
     {
       "key": "custom_product",
