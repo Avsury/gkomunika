@@ -255,7 +255,6 @@
       </button>
     </div>
   </div>
-
   
   <!-- Tombol reset -->
   <button id="reset-plan" type="button">Reset Plan</button>
@@ -448,6 +447,21 @@
     }
   });
 
+  function updateCartCount() {
+    fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        const countEl = document.getElementById('cart-count');
+        if (countEl) {
+          countEl.textContent = cart.item_count;
+        }
+      })
+      .catch(error => {
+        console.error("Failed to update cart count:", error);
+      });
+  }
+  
+
   function handleCartAction(action) {
     const variant = findVariant();
     const quantity = parseInt(quantityInput.value) || 1;
@@ -509,6 +523,7 @@
       .then(res => res.json())
       .then(() => {
         showPopup("Item successfully added to cart.");
+        updateCartCount(); // ← tambahkan ini
       })
       .catch(err => {
         console.error("Add to cart failed:", err);
