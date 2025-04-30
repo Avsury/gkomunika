@@ -24,7 +24,7 @@
                 {% if block.settings.icon != blank %}
                   {% assign icon_name = block.settings.icon | append: '.png' %}
                   <div class="htu__card-icon">
-                    <img src="{{ icon_name | asset_url }}" alt="icon" />
+                    <img src="{{ icon_name | asset_url }}" width="50px" height="50px" alt="icon" />
                   </div>
                 {% endif %}
                 
