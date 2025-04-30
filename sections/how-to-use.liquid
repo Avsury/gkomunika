@@ -22,8 +22,10 @@
             {% if block.type == 'wgk_card' %}
               <section class="htu__wgk-card">
                 {% if block.settings.icon != blank %}
-                  {% assign icon_name = block.settings.icon | append: '.svg' %}
-                    <div class="htu__card-icon">{{ icon_name | inline_asset_content }}</div>
+                  {% assign icon_name = block.settings.icon | append: '.png' %}
+                  <div class="htu__card-icon">
+                    <img src="{{ icon_name | asset_url }}" alt="icon" />
+                  </div>
                 {% endif %}
                 
                 <div class="htu__card-title">{{ block.settings.title }}</div>
