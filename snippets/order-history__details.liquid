@@ -1,0 +1,102 @@
+{% style %}
+.oh-details__card {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.oh-details__card h2 {
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-supper-large);
+}
+.oh-details__date {
+  display: flex;
+  width: auto;
+  gap: 5px;
+}
+.oh-details__card-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: tomato;
+}
+{% endstyle %}
+
+
+<div class="oh-details__container">
+  <section class="oh-details__card">
+    <div class="oh-details__date">
+      {{- 'border-inv.svg' | inline_asset_content -}}
+      <h2>{{ order.created_at | date: '%d/%m/%Y %H:%M' }}</h2>
+    </div>
+    <h2>#{{ order.name }}</h2>
+  </section>
+
+  {% for line_item in order.line_items %}
+    <div class="oh-details__wrapper">
+      <section class="oh-details__card">
+        <div class="oh-details__images">
+          {% assign countries_array = line_item.product.metafields.coverage.country.value %}
+          
+          {% assign total_countries = countries_array.size %}
+          {% if total_countries == 1 %}
+            {% assign country_trimmed = countries_array.first | strip | downcase %}
+            {% assign country_filename = country_trimmed | replace: ' ', '-' | capitalize | append: '.svg' %}
+            <img
+              class="oh-details__single-image"
+              src="{{ country_filename | file_url }}"
+              alt="{{ country_trimmed }}"
+              width="40"
+              height="40"
+            >
+          {% elsif total_countries > 1 %}
+            <div class="oh-details__multi-images">
+              {% for country in countries_array limit: 3 %}
+                {% assign country_trimmed = country | strip | downcase %}
+                {% assign country_filename = country_trimmed | replace: ' ', '-' | capitalize | append: '.svg' %}
+                <img
+                  class="oh-details__multi-image"
+                  src="{{ country_filename | file_url }}"
+                  alt="{{ country_trimmed }}"
+                  width="20"
+                  height="20"
+                >
+              {% endfor %}
+              {% if total_countries > 3 %}
+                <div class="oh-details__count">
+                  <span>+{{ total_countries | minus: 3 }}</span>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="oh-details__card-wrapper">
+          {% assign product_name_only = line_item.title | split: ' - ' | first %}
+          {% assign variant_raw = line_item.title | split: ' - ' | last %}
+          {% assign formatted_variant = variant_raw | split: ' / ' | join: ', ' %}
+          <div class="oh-details__card-content">
+          <h2 class="oh-details__card-title">{{ product_name_only }}</h2>
+          <h2 class="oh-details__card-variant">{{ formatted_variant }}</h2>
+          </div>
+          <div class="oh-details__quantity">
+            <p>x {{ line_item.quantity }}</p>
+            <p>{{ line_item.price | money_with_currency }}</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  {% endfor %}
+
+  {% unless template.suffix == 'order-details' %}
+    <div class="oh-details__summary">
+      <section class="oh-details__total-payment">
+        <p>Total Payment</p>
+        <h2>{{ order.total_price | money_with_currency }}</h2>
+      </section>
+      <button class="oh-details__button" data-order-id="{{ order.id }}">Details</button>
+    </div>
+  {% endunless %}
+</div>
